@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Callum Scholes — Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:     #0e0e0e;
+    --bg2:    #141414;
+    --border: #1f1f1f;
+    --dim:    #5f5f5f;
+    --mid:    #aaaaaa;
+    --fg:     #dbdbdb;
+    --bright: #efefef;
+    --accent: #ee69f3;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  .boil-defs { position:absolute; width:0; height:0; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:200;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 48px;
+  }
+  .nav-logo {
+    font-family: 'Gochi Hand', cursive;
+    font-size: 1.3rem; color: var(--bright);
+    text-decoration: none; filter: url(#boil);
+  }
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a {
+    font-size: 11px; letter-spacing:.15em; text-transform:uppercase;
+    color: var(--mid); text-decoration:none; transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--bright); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  h1 {
+    font-family: 'Gochi Hand', cursive;
+    font-size: clamp(4rem, 10vw, 9rem);
+    line-height: 1; color: var(--bright);
+    filter: url(#boil); margin-bottom: 32px;
+  }
+  h1 em { color: var(--accent); font-style: normal; }
+  .hero-meta { display:flex; gap:40px; align-items:center; flex-wrap:wrap; }
+  .status { display:flex; align-items:center; gap:8px; font-size:11px; color:var(--mid); letter-spacing:.1em; }
+  .dot { width:6px; height:6px; border-radius:50%; background:var(--accent); animation: blink 2s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+  .hero-loc { font-size:11px; color:var(--dim); letter-spacing:.1em; }
+
+  /* ── SECTIONS ── */
+  section { padding:90px 48px; border-bottom:1px solid var(--border); max-width:900px; margin:0 auto; width:100%; }
+  section.full { max-width:100%; }
+  .label { font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--dim); margin-bottom:48px; }
+  h2 {
+    font-family: 'Gochi Hand', cursive;
+    font-size: clamp(2.8rem,5vw,5rem); font-weight:400; line-height:1;
+    color: var(--bright); filter: url(#boil); margin-bottom:40px;
+  }
+  h2 em { color: var(--accent); font-style:normal; }
+  p { color:var(--mid); line-height:1.9; font-size:12.5px; }
+  p + p { margin-top:16px; }
+
+  /* ── PROJECTS ── */
+  .proj {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px 0; border-bottom:1px solid var(--border);
+    gap:24px; cursor: pointer;
+    transition: background .15s;
+    position: relative;
+  }
+  .proj:first-of-type { border-top:1px solid var(--border); }
+  .proj::after {
+    content: '→';
+    font-size: 14px; color: var(--dim);
+    opacity: 0;
+    transition: opacity .2s, transform .2s;
+    transform: translateX(-6px);
+    flex-shrink: 0;
+  }
+  .proj:hover::after { opacity:1; transform:translateX(0); }
+  .proj-name {
+    font-family: 'Gochi Hand', cursive;
+    font-size: 1.6rem; color: var(--fg);
+    filter: url(#boil); transition: color .15s;
+  }
+  .proj:hover .proj-name { color: var(--bright); }
+  .proj-meta { display:flex; gap:20px; align-items:center; flex-shrink:0; }
+  .proj-stack { font-size:11px; color:var(--dim); letter-spacing:.08em; }
+  .proj-year  { font-size:11px; color:var(--dim); }
+
+  /* ── EXPERIENCE ── */
+  .exp { padding:28px 0; border-bottom:1px solid var(--border); }
+  .exp:first-of-type { border-top:1px solid var(--border); }
+  .exp-top { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px; flex-wrap:wrap; gap:8px; }
+  h3 { font-family:'Gochi Hand', cursive; font-size:1.6rem; font-weight:400; color:var(--bright); filter:url(#boil); }
+  .exp-when  { font-size:11px; color:var(--dim); }
+  .exp-where { font-size:11px; color:var(--accent); letter-spacing:.1em; margin-bottom:8px; }
+
+  /* ── CONTACT ── */
+  .contact { text-align:center; padding:120px 48px; border-bottom:none; }
+  .contact h2 { margin-bottom:16px; }
+  .contact p  { margin-bottom:40px; }
+  .links { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; }
+  .link {
+    font-size:11px; letter-spacing:.15em; text-transform:uppercase;
+    color:var(--mid); text-decoration:none;
+    padding:10px 22px; border:1px solid var(--border);
+    transition: color .2s, border-color .2s;
+  }
+  .link:hover { color:var(--bright); border-color:var(--mid); }
+  .link.hi { background:var(--accent); color:var(--bg); border-color:var(--accent); }
+  .link.hi:hover { background:transparent; color:var(--accent); }
+
+  /* ── FOOTER ── */
+  footer { padding:24px 48px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; border-top:1px solid var(--border); }
+  footer span { font-size:10px; color:var(--dim); letter-spacing:.1em; }
+
+  /* ═══════════════════════════════════════════
+     PROJECT DETAIL PANEL
+  ═══════════════════════════════════════════ */
+  .panel-overlay {
+    position: fixed; inset: 0; z-index: 300;
+    background: rgba(0,0,0,0);
+    pointer-events: none;
+    transition: background .4s ease;
+  }
+  .panel-overlay.open {
+    background: rgba(0,0,0,.7);
+    pointer-events: all;
+  }
+
+  .panel {
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: min(680px, 100vw);
+    background: var(--bg2);
+    border-left: 1px solid var(--border);
+    z-index: 400;
+    transform: translateX(100%);
+    transition: transform .45s cubic-bezier(.16,1,.3,1);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .panel.open { transform: translateX(0); }
+
+  .panel-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding: 36px 40px 0;
+    position: sticky; top: 0;
+    background: var(--bg2);
+    z-index: 10;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .panel-close {
+    background: none; border: none; cursor: pointer;
+    font-size: 20px; color: var(--mid); padding: 4px 8px;
+    transition: color .2s; font-family: 'IBM Plex Mono', monospace;
+    line-height: 1;
+  }
+  .panel-close:hover { color: var(--bright); }
+
+  .panel-title {
+    font-family: 'Gochi Hand', cursive;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    color: var(--bright); filter: url(#boil);
+    line-height: 1;
+  }
+
+  .panel-body { padding: 36px 40px; flex: 1; overflow-y: auto; }
+
+  /* Image gallery */
+  .panel-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+  .panel-images .img-main {
+    grid-column: 1 / -1;
+  }
+
+  .proj-img {
+    width: 100%; aspect-ratio: 16/9;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; position: relative;
+  }
+
+
+  .proj-img.tall { aspect-ratio: 4/3; }
+
+  /* Placeholder "screenshot" drawn with CSS/SVG */
+  .proj-img svg { width:100%; height:100%; }
+
+  .proj-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  } 
+
+  /* Meta row */
+  .panel-meta {
+    display: flex; gap: 32px; flex-wrap: wrap;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .meta-item { display:flex; flex-direction:column; gap:4px; }
+  .meta-key  { font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); }
+  .meta-val  { font-size:12px; color:var(--fg); }
+  .meta-val.accent { color: var(--accent); }
+
+  /* Description */
+  .panel-desc { margin-bottom: 28px; }
+  .panel-desc p { color: var(--mid); line-height:1.9; font-size:12.5px; }
+  .panel-desc p + p { margin-top:14px; }
+
+  /* Tags */
+  .panel-tags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:36px; }
+  .ptag {
+    font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+    border:1px solid var(--border); color:var(--dim); padding:4px 10px;
+  }
+
+  /* Links */
+  .panel-links { display:flex; gap:8px; }
+  .plink {
+    font-size:11px; letter-spacing:.15em; text-transform:uppercase;
+    color:var(--mid); text-decoration:none;
+    padding:10px 20px; border:1px solid var(--border);
+    transition: color .2s, border-color .2s;
+  }
+  .plink:hover { color:var(--bright); border-color:var(--mid); }
+  .plink.hi { background:var(--accent); color:var(--bg); border-color:var(--accent); }
+  .plink.hi:hover { background:transparent; color:var(--accent); }
+
+  /* Prev / next nav inside panel */
+  .panel-nav {
+    display: flex; justify-content: space-between;
+    padding: 24px 40px;
+    border-top: 1px solid var(--border);
+  }
+  .panel-nav-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: 11px; letter-spacing:.15em; text-transform:uppercase;
+    color: var(--mid); display:flex; align-items:center; gap:8px;
+    transition: color .2s; font-family:'IBM Plex Mono', monospace;
+  }
+  .panel-nav-btn:hover { color: var(--bright); }
+  .panel-nav-btn:disabled { opacity:.2; cursor:default; }
+
+  @media (max-width:600px) {
+    nav { padding:18px 24px; }
+    nav .nav-links { display:none; }
+    .hero, section, .contact, footer { padding-left:24px; padding-right:24px; }
+    h1 { font-size:3.5rem; }
+    .panel { width:100vw; }
+    .panel-header, .panel-body, .panel-nav { padding-left:24px; padding-right:24px; }
+    .panel-images { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<svg class="boil-defs" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="boil" x="-8%" y="-15%" width="116%" height="135%">
+      <feTurbulence id="turb" type="fractalNoise" baseFrequency="0.032" numOctaves="3" seed="12" result="noise"/>
+      <feDisplacementMap id="disp" in="SourceGraphic" in2="noise" scale="4.0" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Callum Scholes</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Software<br><em>Developer</em></h1>
+  <div class="hero-meta">
+    <div class="status"><span class="dot"></span>Open to work</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="label">About</p>
+  <h2>I make<br><em>games</em></h2>
+  <p>From modding to using game engines and playing with shaders.</p>
+  <p>I enjoy coding things that are fun, work, and look nice</p>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="label">Projects — click to explore</p>
+  <h2>Projects</h2>
+
+  <div class="proj" data-project="0">
+    <span class="proj-name">True Surf</span>
+    <div class="proj-meta">
+      <span class="proj-stack">C++ · VR · Mobile</span>
+      <span class="proj-year">2021 - 2026</span>
+    </div>
+  </div>
+  <div class="proj" data-project="1">
+    <span class="proj-name">True Skate         </span>
+    <div class="proj-meta">
+      <span class="proj-stack">C++ · Unreal Engine · Mobile</span>
+      <span class="proj-year">2021 - 2026</span>
+    </div>
+  </div>
+  <div class="proj" data-project="2">
+    <span class="proj-name">Polabi's Adventure</span>
+    <div class="proj-meta">
+      <span class="proj-stack">C++ · Unreal Engine</span>
+      <span class="proj-year">2021</span>
+    </div>
+  </div>
+  <div class="proj" data-project="3">
+    <span class="proj-name">Summoners Dream</span>
+    <div class="proj-meta">
+      <span class="proj-stack">C# · Terraria</span>
+      <span class="proj-year">2020</span>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="label">Experience</p>
+  <h2>Experience</h2>
+  <div class="exp">
+    <div class="exp-top"><h3>Software Developer</h3><span class="exp-when">2021 — 2026</span></div>
+    <p class="exp-where">True Axis</p>
+    <p>Makers of the worlds best mobile sports games.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact full">
+  <p class="label" style="text-align:center">Contact</p>
+  <h2>Let's <em>talk</em></h2>
+  <div class="links">
+    <a class="link hi" href="mailto:callum.scholes74@gmail.com">callum.scholes74@gmail.com</a>
+    <a class="link" href="https://github.com/HapyProgrammer">GitHub</a>
+    <a class="link" href="https://www.linkedin.com/in/callum-scholes-71b654123">LinkedIn</a>
+    <a class="link" href="CV.pdf" download="CV.pdf">Resume</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Callum Scholes</span>
+</footer>
+
+<!-- ── PANEL ── -->
+<div class="panel-overlay" id="overlay"></div>
+<div class="panel" id="panel">
+  <div class="panel-header">
+    <div class="panel-title" id="panel-title"></div>
+    <button class="panel-close" id="panel-close">✕</button>
+  </div>
+  <div class="panel-body" id="panel-body"></div>
+  <div class="panel-nav">
+    <button class="panel-nav-btn" id="prev-btn">← Prev</button>
+    <button class="panel-nav-btn" id="next-btn">Next →</button>
+  </div>
+</div>
+
+<script>
+// ── BOIL ENGINE ──────────────────────────────────
+const turb = document.getElementById('turb');
+const disp = document.getElementById('disp');
+let seed = 12;
+setInterval(() => {
+  seed = (seed + 1 + Math.floor(Math.random() * 8)) % 400;
+  turb.setAttribute('seed', seed);
+  turb.setAttribute('baseFrequency', (0.028 + (Math.random()-.5)*.011).toFixed(4));
+  disp.setAttribute('scale', (3.2 + Math.random()*2.8).toFixed(2));
+}, 66);
+
+// ── PROJECT DATA ─────────────────────────────────
+const projects = [
+  {
+    name: 'True Surf',
+    stack: ['C++', 'Mobile', 'VR', 'OpenGL', 'VULKAN'],
+    desc: [
+      'True Surf is the worlds most authentic surfing game for IOS and Android.',
+      'I was responsible for porting the mobile game from Mobile to VR. Adding multiple VR only features as well as implementing features that would work for both mobile and VR.',
+      'Due to the graphics engine also switching from OpenGL to VULKAN I was able to get a deep understanding of VULKAN. Using GLSL I implemented some shaders for the VR game.'
+    ],
+    images: [
+      'TrueSurf4.webp',
+      'TrueSurf3.webp',
+      'TrueSurf1.webp',
+    ]
+  },
+  {
+    name: 'True Skate',
+    stack: ['C++', 'Mobile', 'PC', 'OpenGL', 'Unreal Engine'],
+    desc: [
+      'True Sakte is one of the worlds leading mobile sports game.',
+      'I ported True Skate mobile to releasing a PC version as well as assited in starting a working multiplayer system for both the PC and Mobile version.',
+      'Used UE4 to implement cloth physics, dynamic render targets for live billboard feeds and UE4 widgest for the UI and menuing.'
+    ],
+    images: [
+      'TrueSkate3.webp',
+      'TrueSkate1.jpg',
+      'TrueSkate2.jpg',
+    ]
+  },
+  {
+    name: 'Polabis adventure',
+    stack: ['C++', 'Unreal Engine'],
+    desc: [
+      'A top-down arpg project built in UE4.',
+      'Using UE4 Polabis adventure has a variety of interesting shaders, graphical effects and a working cloth physics system.',
+      'The Finn buddy also uses an interesting Buddy system allowing for quick switching between defensive and agressive buddy AI behaviour.'
+    ],
+    images: [
+      'Polabi3.png',
+      'Polabi2.png',
+      'Polabi1.png',
+    ]
+  },
+  {
+    name: 'Summoners dream',
+    stack: ['C#', 'Modding'],
+    desc: [
+      'Summoners dream is a Terraria mod made by me which has over 10,000 downloads.',
+      'I made 3 new summons and 1 new sentries based on the popular cartoon characters "Stitch" "Finn" and "Icebear".',
+      'Ice bears AI implements a completely new AI system to allow Ice bears melee attacks to hit all sorts of bosses as a ground based melee summon.'
+    ],
+    images: [
+      'SummonersDream0.png',
+      'SummonersDream1.png',
+      'SummonersDream2.png',
+    ]
+  }
+];
+
+// ── PANEL LOGIC ──────────────────────────────────
+const panel   = document.getElementById('panel');
+const overlay = document.getElementById('overlay');
+const titleEl = document.getElementById('panel-title');
+const bodyEl  = document.getElementById('panel-body');
+const closeBtn= document.getElementById('panel-close');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+
+let current = -1;
+
+function openPanel(idx) {
+  current = idx;
+  render(idx);
+  panel.classList.add('open');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePanel() {
+  panel.classList.remove('open');
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function render(idx) {
+  const p = projects[idx];
+  titleEl.textContent = p.name;
+
+  const [main, ...thumbs] = p.images;
+
+  const thumbHTML = thumbs.map(img=>`
+    <div class="proj-img"><img src="images/${img}" alt="${main}"></div>
+  `).join('');
+
+  bodyEl.innerHTML = `
+    <div class="panel-images">
+      <div class="proj-img img-main"><img src="images/${main}" alt="${main}"></div>
+      ${thumbHTML}
+    </div>
+    <div class="panel-desc">
+      ${p.desc.map(d=>`<p>${d}</p>`).join('')}
+    </div>
+    <div class="panel-tags">
+      ${p.stack.map(t=>`<span class="ptag">${t}</span>`).join('')}
+    </div>
+  `;
+
+  prevBtn.disabled = idx === 0;
+  nextBtn.disabled = idx === projects.length - 1;
+  panel.scrollTop = 0;
+}
+
+document.querySelectorAll('.proj').forEach(el => {
+  el.addEventListener('click', () => openPanel(+el.dataset.project));
+});
+
+closeBtn.addEventListener('click', closePanel);
+overlay.addEventListener('click', closePanel);
+prevBtn.addEventListener('click', () => { if(current>0) render(--current); });
+nextBtn.addEventListener('click', () => { if(current<projects.length-1) render(++current); });
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closePanel();
+  if (e.key === 'ArrowLeft'  && panel.classList.contains('open') && current>0) render(--current);
+  if (e.key === 'ArrowRight' && panel.classList.contains('open') && current<projects.length-1) render(++current);
+});
+</script>
+</body>
+</html>
