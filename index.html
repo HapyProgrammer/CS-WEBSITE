@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" type="image/x-icon" href="CS.ico">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Callum Scholes — Developer</title>
@@ -431,7 +432,7 @@ const projects = [
     name: 'True Skate',
     stack: ['C++', 'Mobile', 'PC', 'OpenGL', 'Unreal Engine'],
     desc: [
-      'True Sakte is one of the worlds leading mobile sports game.',
+      'True Skate is the #1 paid mobile sports game.',
       'I ported True Skate mobile to releasing a PC version as well as assited in starting a working multiplayer system for both the PC and Mobile version.',
       'Used UE4 to implement cloth physics, dynamic render targets for live billboard feeds and UE4 widgest for the UI and menuing.'
     ],
@@ -503,12 +504,12 @@ function render(idx) {
   const [main, ...thumbs] = p.images;
 
   const thumbHTML = thumbs.map(img=>`
-    <div class="proj-img"><img src="images/${img}" alt="${main}"></div>
+    <div class="proj-img"><img src="Images/${img}" alt="${img}"></div>
   `).join('');
 
   bodyEl.innerHTML = `
     <div class="panel-images">
-      <div class="proj-img img-main"><img src="images/${main}" alt="${main}"></div>
+      <div class="proj-img img-main"><img src="Images/${main}" alt="${main}"></div>
       ${thumbHTML}
     </div>
     <div class="panel-desc">
